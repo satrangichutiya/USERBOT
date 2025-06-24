@@ -1,22 +1,19 @@
-import time
 from pyrogram import Client, filters
 from pyrogram.types import Message
+import time
 
-@Client.on_message(filters.command("ping", prefixes=[".", "/", "!"]))
-async def ping_handler(client, message: Message):
+@Client.on_message(filters.command("ping", prefixes=[".", "/", "!"]) & filters.me)
+async def ping(_, message: Message):
     start = time.time()
-
-    sent = await message.reply_text("🏓 Pinging...")
-
+    sent = await message.reply("🔁 Testing Ping...")
     end = time.time()
-    ping_time = (end - start) * 1000
-    ping_str = f"{ping_time:.2f} ms"
 
-    await sent.edit_text(
+    latency = (end - start) * 1000
+    await sent.edit(
         f"""
-<b>🔧 PONG!</b>
-🌀 <b>Latency:</b> <code>{ping_str}</code>
-🤖 <b>UserBot:</b> Moon 3.4.5
-🚀 <b>Status:</b> <i>Online & Working</i>
+<b>🏓 PING REPORT</b>
+🧠 <b>User:</b> {message.from_user.mention}
+📶 <b>Latency:</b> <code>{latency:.2f} ms</code>
+🚀 <b>Status:</b> Active & OP
 """
     )
