@@ -9,7 +9,7 @@ aiohttp>=3.8.6
 requests>=2.31.0
 python-dotenv>=1.0.0
 pillow>=10.0.1
-
+psutil>=5.9.6
 # Media Processing
 yt-dlp>=2023.9.24  # Better than youtube-dl
 ffmpeg-python>=0.2.0
