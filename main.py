@@ -11,10 +11,7 @@ import sys
 import os
 from pathlib import Path
 
-from pyrogram import Client, filters
-from pyrogram.types import Message
-from pyrogram.errors import FloodWait
-
+from pyrogram import Client
 from config import Config
 from utils.database import Database
 from utils.helpers import load_plugins, setup_logging
@@ -33,7 +30,7 @@ class MoonUserBot:
             plugins=dict(root="plugins")
         )
         self.db = Database()
-        
+
     async def start(self):
         """Start the userbot"""
         try:
@@ -44,10 +41,10 @@ class MoonUserBot:
             logger.info(f"📱 Phone: {me.phone_number}")
             logger.info(f"🆔 User ID: {me.id}")
             logger.info(f"🔧 Total Plugins: {len(os.listdir('plugins'))}")
-            
+
             # Initialize database
             await self.db.connect()
-            
+
             # Send alive message if log chat is configured
             if Config.LOG_CHAT:
                 try:
@@ -62,11 +59,11 @@ class MoonUserBot:
                     )
                 except Exception as e:
                     logger.error(f"Failed to send alive message: {e}")
-                    
+
         except Exception as e:
-            logger.error(f"Failed to start userbot: {e}")
+            logger.error(f"❌ Failed to start userbot: {e}")
             sys.exit(1)
-    
+
     async def stop(self):
         """Stop the userbot"""
         await self.app.stop()
@@ -80,9 +77,9 @@ async def main():
     """Main function"""
     try:
         await moon.start()
-        await moon.app.idle()
+        await asyncio.Event().wait()  # Keeps bot running (replacement for .idle())
     except KeyboardInterrupt:
-        logger.info("Received interrupt signal")
+        logger.info("🛑 Received interrupt signal")
     finally:
         await moon.stop()
 
