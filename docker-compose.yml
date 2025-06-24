@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  moon-userbot:
+    build: .
+    container_name: moon-userbot
+    restart: unless-stopped
+    environment:
+      - API_ID=${API_ID}
+      - API_HASH=${API_HASH}
+      - SESSION_STRING=${SESSION_STRING}
+      - MONGO_URI=mongodb://mongo:27017/
+      - REDIS_URI=redis://redis:6379
+    depends_on:
+      - mongo
+      - redis
+    volumes:
+      - ./logs:/app/logs
+      - ./downloads:/app/downloads
+    networks:
+      - moon-network
+
+  mongo:
+    image: mongo:6.0
+    container_name: moon-mongo
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_DATABASE=moon_userbot
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - moon-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: moon-redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - moon-network
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: moon-mongo-express
+    restart: unless-stopped
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=password
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongo
+    networks:
+      - moon-network
+
+volumes:
+  mongo_data:
+  redis_data:
+
+networks:
+  moon-network:
+    driver: bridge

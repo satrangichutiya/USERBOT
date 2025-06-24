@@ -1,0 +1,63 @@
+{
+  "name": "Moon UserBot",
+  "description": "Advanced Telegram UserBot with 300+ modules and features",
+  "keywords": [
+    "telegram",
+    "userbot",
+    "pyrogram",
+    "python",
+    "moon"
+  ],
+  "repository": "https://github.com/yourusername/moon-userbot",
+  "website": "https://github.com/yourusername/moon-userbot",
+  "success_url": "https://github.com/yourusername/moon-userbot",
+  "stack": "container",
+  "env": {
+    "API_ID": {
+      "description": "Get this value from https://my.telegram.org/apps",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "Get this value from https://my.telegram.org/apps",
+      "required": true
+    },
+    "SESSION_STRING": {
+      "description": "Generate using generate_session.py",
+      "required": true
+    },
+    "OWNER_ID": {
+      "description": "Your Telegram user ID",
+      "required": true
+    },
+    "MONGO_URI": {
+      "description": "MongoDB connection string",
+      "value": "mongodb://localhost:27017/",
+      "required": false
+    },
+    "LOG_CHAT": {
+      "description": "Chat ID for logging (optional)",
+      "required": false
+    },
+    "PMPERMIT": {
+      "description": "Enable PM permit (True/False)",
+      "value": "True",
+      "required": false
+    },
+    "TIME_ZONE": {
+      "description": "Your timezone",
+      "value": "Asia/Kolkata",
+      "required": false
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}

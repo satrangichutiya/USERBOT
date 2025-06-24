@@ -1,0 +1,7 @@
+# Heroku Configuration for Moon UserBot
+build:
+  docker:
+    worker: Dockerfile
+
+run:
+  worker: python main.py
