@@ -8,9 +8,9 @@
     "python",
     "moon"
   ],
-  "repository": "https://github.com/yourusername/moon-userbot",
-  "website": "https://github.com/yourusername/moon-userbot",
-  "success_url": "https://github.com/yourusername/moon-userbot",
+  "repository": "https://github.com/satrangichutiya/USERBOT",
+  "website": "https://github.com/satrangichutiya/USERBOT",
+  "success_url": "https://github.com/satrangichutiya/USERBOT",
   "stack": "container",
   "env": {
     "API_ID": {
