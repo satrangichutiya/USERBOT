@@ -1,20 +1,17 @@
 #!/usr/bin/env python3
 """
-🌙 Moon UserBot - Advanced Telegram UserBot
-Version: 3.4.5
-Author: Moon Team
+🌙 Moon UserBot - FIXED MAIN.PY
 """
 
 import asyncio
 import logging
-import sys
 import os
-from pathlib import Path
+import sys
 
 from pyrogram import Client
 from config import Config
 from utils.database import Database
-from utils.helpers import load_plugins, setup_logging
+from utils.helpers import setup_logging
 
 # Setup logging
 setup_logging()
@@ -32,20 +29,17 @@ class MoonUserBot:
         self.db = Database()
 
     async def start(self):
-        """Start the userbot"""
         try:
             await self.app.start()
             me = await self.app.get_me()
-            logger.info(f"🌙 Moon UserBot Started Successfully!")
+            logger.info("🌙 Moon UserBot Started Successfully!")
             logger.info(f"👤 User: {me.first_name} (@{me.username})")
             logger.info(f"📱 Phone: {me.phone_number}")
             logger.info(f"🆔 User ID: {me.id}")
             logger.info(f"🔧 Total Plugins: {len(os.listdir('plugins'))}")
 
-            # Initialize database
             await self.db.connect()
 
-            # Send alive message if log chat is configured
             if Config.LOG_CHAT:
                 try:
                     await self.app.send_message(
@@ -58,28 +52,30 @@ class MoonUserBot:
                         f"🚀 **Version:** `3.4.5`"
                     )
                 except Exception as e:
-                    logger.error(f"Failed to send alive message: {e}")
-
+                    logger.warning(f"⚠️ Failed to send log message: {e}")
         except Exception as e:
-            logger.error(f"❌ Failed to start userbot: {e}")
+            logger.error(f"❌ Failed to start: {e}")
             sys.exit(1)
 
+    async def run_forever(self):
+        logger.info("🔁 Running UserBot... (Press CTRL+C to stop)")
+        while True:
+            await asyncio.sleep(10)
+
     async def stop(self):
-        """Stop the userbot"""
         await self.app.stop()
         await self.db.disconnect()
-        logger.info("🌙 Moon UserBot Stopped!")
+        logger.info("🛑 Moon UserBot Stopped!")
 
-# Global userbot instance
+
 moon = MoonUserBot()
 
 async def main():
-    """Main function"""
     try:
         await moon.start()
-        await asyncio.Event().wait()  # Keeps bot running (replacement for .idle())
-    except KeyboardInterrupt:
-        logger.info("🛑 Received interrupt signal")
+        await moon.run_forever()
+    except (KeyboardInterrupt, SystemExit):
+        logger.info("🔌 Gracefully stopping...")
     finally:
         await moon.stop()
 
