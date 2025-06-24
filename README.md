@@ -1,4 +1,4 @@
-# 🌙 Moon UserBot
+# 🌙 megadoom UserBot
 
 **Advanced Telegram UserBot with 300+ Modules and Features**
 
@@ -116,25 +116,6 @@
 ## 📁 Project Structure
 
 ```
-moon-userbot/
-├── main.py              # Main bot file
-├── config.py            # Configuration
-├── requirements.txt     # Dependencies
-├── utils/
-│   ├── database.py      # Database operations
-│   └── helpers.py       # Helper functions
-├── plugins/
-│   ├── basic.py         # Basic commands
-│   ├── fun.py           # Fun commands
-│   ├── admin.py         # Admin commands
-│   ├── raid.py          # Raid features
-│   ├── filters.py       # Message filters
-│   ├── notes.py         # Notes system
-│   ├── userinfo.py      # User information
-│   ├── system.py        # System commands
-│   ├── pmpermit.py      # PM permit
-│   └── virustotal.py    # VirusTotal integration
-└── README.md
 ```
 
 ## 🛡️ Security Features
@@ -190,9 +171,10 @@ This userbot is for educational purposes only. Users are responsible for complyi
 
 ## 🆘 Support
 
-- **Telegram:** [@MoonUserBotSupport](https://t.me/MoonUserBotSupport)
-- **Channel:** [@MoonUserBotUpdates](https://t.me/MoonUserBotUpdates)
-- **Issues:** [GitHub Issues](https://github.com/yourusername/moon-userbot/issues)
+- **Telegram:** [@nib
+- **Channel:** [@nih
+- 
+- **Issues:** [GitHub Issues]()
 
 ## 🌟 Credits
 
@@ -203,6 +185,6 @@ This userbot is for educational purposes only. Users are responsible for complyi
 
 ---
 
-**Made with ❤️ by Moon Team**
+**Made with ❤️ by Mqn Team**
 
 *Star ⭐ this repository if you found it helpful!*
